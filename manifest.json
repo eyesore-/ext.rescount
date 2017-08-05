@@ -1,0 +1,17 @@
+{
+  "manifest_version": 2,
+
+  "name": "Response Count",
+  "description": "",
+  "version": "0.0.1",
+
+  "browser_action": {
+    "default_popup": "popup.html",
+    "default_title": "Hi (:"
+  },
+  "permissions": [
+    "tabs",
+    "activeTab",
+    "storage"
+  ]
+}
