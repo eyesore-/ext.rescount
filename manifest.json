@@ -9,6 +9,20 @@
     "default_popup": "popup.html",
     "default_title": "Hi (:"
   },
+
+  "content_scripts": [
+    {
+      "matches": ["*://*/*", "file:///Users/joel/Code/dummy/index.html"],
+      "js": ["init.js"],
+      "run_at": "document_end"
+    }
+  ],
+
+  "background": {
+    "scripts": ["index.js"],
+    "persistent": false
+  },
+
   "permissions": [
     "tabs",
     "activeTab",
