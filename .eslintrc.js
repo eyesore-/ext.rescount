@@ -2,5 +2,8 @@ module.exports = {
   "env": {
     "browser": true
   },
-  "extends": "standard"
+  "extends": "standard",
+  "globals": {
+    "chrome": true
+  }
 }
