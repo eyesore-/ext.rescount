@@ -19,6 +19,7 @@
     {
       "matches": [
         "*://*/*"
+      ],
       "js": ["init.js"],
       "run_at": "document_end"
     }
