@@ -8,7 +8,7 @@ storage.get('responses', data => {
 const addNewResponse = newResponse => {
   storage.get('responses', data => {
     const lastResponse = data.responses[data.responses.length - 1]
-    const newDay = Math.floor(lastResponse / 8.64e+7) !== Math.floor(Date.now() / 8.64e+7)
+    const newDay = Math.floor(lastResponse / 8.64e+7) !== Math.floor(newResponse / 8.64e+7)
     const responses = newDay ? [] : data.responses
     responses.push(newResponse)
     storage.set({responses})
@@ -21,11 +21,6 @@ const updateBadge = responses => {
   chrome.browserAction.setBadgeBackgroundColor({color: [225, 0, 0, 225]})
 }
 
-const updateUI = responses => {
-  console.log('UPDATE UI:', responses)
-  document.body.innerText = responses.length
-}
-
 chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
   console.log('REQUEST:', request)
   addNewResponse(request.response)
@@ -35,5 +30,4 @@ chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
 
 chrome.storage.onChanged.addListener(({responses}) => {
   updateBadge(responses.newValue)
-  updateUI(responses.newValue)
 })
