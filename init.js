@@ -1,4 +1,4 @@
-document.body.onload = () => {
+window.onload = () => {
   const updateEvent = e => {
     console.clear()
     console.log(new Date())
@@ -9,15 +9,21 @@ document.body.onload = () => {
     node.addEventListener('click', updateEvent)
     console.info('Event Added')
   }
-  const container = document.getElementById('gwt-debug-AgentPage').children[0]
 
-  const observer = new MutationObserver(mutations => {
+  const config = { childList: true, subtree: true }
+  const agentPageObserver = new MutationObserver(mutations => {
     console.log(new Date())
     const responseButton = document.getElementsByClassName('GPA4MYKDHRH')[0]
     if (responseButton) addUpdateEvent(responseButton)
     mutations.forEach(mutation => console.log(mutation.type))
   })
-  const config = { childList: true, subtree: true }
+  const bodyObserver = new MutationObserver(mutations => {
+    const container = document.getElementById('gwt-debug-AgentPage')
+    if (container) {
+      agentPageObserver.observe(container.children[0], config)
+      bodyObserver.disconnect()
+    }
+  })
 
-  observer.observe(container, config)
+  bodyObserver.observe(document.body, config)
 }
