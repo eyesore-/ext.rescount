@@ -1,3 +1,17 @@
+const storage = chrome.storage.local
+
+const addNewResponse = newResponse => {
+  storage.get('responses', data => {
+    const responses = data.responses || []
+    responses.push(newResponse)
+    storage.set({responses})
+  })
+}
+
+chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
+  addNewResponse(request.response)
+})
+
 // subscribe to storage
 
 chrome.storage.onChanged.addListener(({responses}) => {
