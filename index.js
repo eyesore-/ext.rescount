@@ -8,7 +8,8 @@ storage.get('responses', data => {
 const addNewResponse = newResponse => {
   storage.get('responses', data => {
     const lastResponse = data.responses[data.responses.length - 1]
-    const newDay = Math.floor(lastResponse / 8.64e+7) !== Math.floor(newResponse / 8.64e+7)
+    const newDay =
+      new Date(lastResponse).getDate() !== new Date(newResponse).getDate()
     const responses = newDay ? [] : data.responses
     responses.push(newResponse)
     storage.set({responses})
