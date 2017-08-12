@@ -5,26 +5,34 @@ storage.get('responses', data => {
   if (!data.responses) storage.set({responses: []})
 })
 
-const addNewResponse = newResponse => {
-  storage.get('responses', data => {
-    const lastResponse = data.responses[data.responses.length - 1]
-    const newDay =
-      new Date(lastResponse).getDate() !== new Date(newResponse).getDate()
-    const responses = newDay ? [] : data.responses
-    responses.push(newResponse)
-    storage.set({responses})
-  })
-}
-
 const updateBadge = responses => {
   const badgeText = responses ? JSON.stringify(responses.length) : '0'
   chrome.browserAction.setBadgeText({text: badgeText})
   chrome.browserAction.setBadgeBackgroundColor({color: [225, 0, 0, 225]})
 }
 
+const newDay = (oldValue, newValue) =>
+  new Date(oldValue).getDate() !== new Date(newValue).getDate()
+
+const messageAction = {
+  ADD_RESPONSE: response => {
+    storage.get('responses', data => {
+      const lastResponse = data.responses[data.responses.length - 1]
+      const responses = newDay(lastResponse, response) ? [] : data.responses
+      responses.push(response)
+      storage.set({responses})
+    })
+  },
+  ADD_START_TIME: time => {
+    if (!localStorage.start || newDay(+localStorage.start, time)) {
+      localStorage.start = time
+    }
+  }
+}
+
 chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
   console.log('REQUEST:', request)
-  addNewResponse(request.response)
+  messageAction[request.action](request.payload)
 })
 
 // subscribe to storage
