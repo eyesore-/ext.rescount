@@ -1,21 +1,16 @@
-const numFormat = num =>
-  num % 1 !== 0 ? num.toFixed(1) : num
+import React from 'react'
+import { render } from 'react-dom'
+import ResponseCount from './responseCount'
+import ResponseAvg from './responseAvg'
 
-const getResponseAvg = (numOfResponses, startTime) => {
-  const hoursWorking = (Date.now() - startTime) / 3.6e6
-  return hoursWorking < 1
-    ? numOfResponses
-    : numFormat(numOfResponses / hoursWorking)
-}
+const App = ({responses}) =>
+  <div>
+    <ResponseCount responses = {responses} />
+    <ResponseAvg responses = {responses} />
+  </div>
 
-const createDiv = content => {
-  let element = document.createElement('div')
-  element.innerText = content
-  return element
-}
+const rootEl = document.getElementById('root')
 
 chrome.storage.local.get('responses', data => {
-  document.body.append(createDiv(data.responses.length))
-  document.body.append(createDiv(
-      getResponseAvg(data.responses.length, +localStorage.start)))
+  render(<App responses = {data.responses} />, rootEl)
 })
