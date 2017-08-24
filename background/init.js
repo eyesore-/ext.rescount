@@ -2,9 +2,13 @@ window.onload = () => {
   const updateEvent = e => {
     console.clear()
     console.log(new Date(), 'Updating')
+    const response = {
+      time: Date.now(),
+      hour: Date.now() - (Date.now() % 3.6e6)
+    }
     chrome.runtime.sendMessage({
       action: 'ADD_RESPONSE',
-      payload: Date.now()
+      payload: response
     })
   }
 
