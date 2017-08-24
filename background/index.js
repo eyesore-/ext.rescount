@@ -1,8 +1,8 @@
 const storage = chrome.storage.local
 
 storage.get('responses', data => {
-  updateBadge(data.responses)
-  if (!data.responses) storage.set({responses: []})
+  updateBadge(data.responses.total)
+  if (!data.responses) storage.set({responses: {total: [], hours: {}}})
 })
 
 const updateBadge = responses => {
@@ -16,11 +16,14 @@ const newDay = (oldValue, newValue) =>
 
 const messageAction = {
   ADD_RESPONSE: response => {
-    storage.get('responses', data => {
-      const lastResponse = data.responses[data.responses.length - 1]
-      const responses = newDay(lastResponse, response) ? [] : data.responses
-      responses.push(response)
-      storage.set({responses})
+    storage.get('responses', ({responses}) => {
+      const lastResponse = responses.total[responses.total.length - 1]
+      const newData = newDay(lastResponse, response.time)
+        ? { total: [], hours: {} }
+        : responses
+      newData.total.push(response.time)
+      newData.hours[response.hour] = responses.hours[response.hour] + 1 || 1
+      storage.set({responses: newData})
     })
   },
   ADD_START_TIME: time => {
@@ -38,5 +41,5 @@ chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
 // subscribe to storage
 
 chrome.storage.onChanged.addListener(({responses}) => {
-  updateBadge(responses.newValue)
+  updateBadge(responses.newValue.total)
 })
