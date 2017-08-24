@@ -1,8 +1,8 @@
 const storage = chrome.storage.local
 
 storage.get('responses', data => {
-  updateBadge(data.responses.total)
   if (!data.responses) storage.set({responses: {total: [], hours: {}}})
+  updateBadge(data.responses.total)
 })
 
 const updateBadge = responses => {
