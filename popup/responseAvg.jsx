@@ -12,7 +12,7 @@ const getResponseAvg = (numOfResponses, startTime) => {
 
 const ResponseAvg = ({responses}) =>
   <div>
-    {getResponseAvg(responses.length, +localStorage.start)} /hour
+    {getResponseAvg(responses.length, +localStorage.start)} /hr
   </div>
 
 export default ResponseAvg
