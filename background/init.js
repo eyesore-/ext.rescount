@@ -1,7 +1,10 @@
 window.onload = () => {
+  // TODO: verify response sent before sending message
   const updateEvent = e => {
     console.clear()
-    console.log(new Date(), 'Updating')
+    console.info(new Date(), 'Updating')
+    console.info('Event', e)
+    console.info('Target', e.target)
     const response = {
       time: Date.now(),
       hour: Date.now() - (Date.now() % 3.6e6)
@@ -35,5 +38,6 @@ window.onload = () => {
     action: 'ADD_START_TIME',
     payload: Date.now()
   })
+
   bodyObserver.observe(document.body, config)
 }
