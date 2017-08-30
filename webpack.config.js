@@ -2,7 +2,11 @@ const webpack = require('webpack')
 const path = require('path')
 
 module.exports = {
-  entry: './popup/popup.js',
+  entry: {
+    popup: './popup/popup.js',
+    background: './background/index.js',
+    init: './background/init.js'
+  },
   output: {
     path: path.resolve(__dirname, 'dist'),
     filename: '[name].bundle.js'
