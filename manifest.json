@@ -18,14 +18,15 @@
   "content_scripts": [
     {
       "matches": [
+        ""
       ],
-      "js": ["background/init.js"],
+      "js": ["dist/init.bundle.js"],
       "run_at": "document_end"
     }
   ],
 
   "background": {
-    "scripts": ["background/index.js"],
+    "scripts": ["dist/background.bundle.js"],
     "persistent": false
   },
 
