@@ -25,5 +25,14 @@
     "presets": [
       "react"
     ]
+  },
+  "eslintConfig": {
+    "env": {
+      "browser": true
+    },
+    "extends": "standard",
+    "globals": {
+      "chrome": true
+    }
   }
 }
