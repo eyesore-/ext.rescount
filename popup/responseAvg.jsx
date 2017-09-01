@@ -1,5 +1,10 @@
 import React from 'react'
 
+const style = {
+  fontSize: '14px',
+  fontWeight: '500'
+}
+
 const numFormat = num =>
   num % 1 !== 0 ? num.toFixed(1) : num
 
@@ -11,8 +16,8 @@ const getResponseAvg = (numOfResponses, startTime) => {
 }
 
 const ResponseAvg = ({responses}) =>
-  <div>
-    {getResponseAvg(responses.length, +localStorage.start)} /hr
+  <div style={style}>
+    {getResponseAvg(responses.length, +localStorage.start)} res. /hour
   </div>
 
 export default ResponseAvg
