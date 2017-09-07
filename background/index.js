@@ -17,11 +17,11 @@ const newDay = (oldValue, newValue) =>
 const messageAction = {
   ADD_RESPONSE: response => {
     storage.get('responses', ({responses}) => {
-      const lastResponse = responses.total[responses.total.length - 1]
-      const newData = newDay(lastResponse, response.time)
+      const prevResponse = responses.total[responses.total.length - 1]
+      const newData = newDay(prevResponse, response.time)
         ? { total: [], hours: {} }
         : responses
-      newData.total.push(response.time)
+      newData.total = [...newData.total, response.time]
       newData.hours[response.hour] = responses.hours[response.hour] + 1 || 1
       storage.set({responses: newData})
     })
