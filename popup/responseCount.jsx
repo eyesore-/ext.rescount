@@ -5,7 +5,7 @@ const style = {
   fontWeight: '600'
 }
 
-const ResponseCount = ({responses}) =>
-  <div style={style}>{responses.length}</div>
+const ResponseCount = ({count}) =>
+  <div style={style}>{count}</div>
 
 export default ResponseCount
