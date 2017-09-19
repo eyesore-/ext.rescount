@@ -1,11 +1,11 @@
 import React from 'react'
-import moment from 'moment'
+import format from 'date-fns'
 
 const HourDisplay = ({hours}) =>
   <div>
     {Object.keys(hours)
       .map(hour =>
-        <div>{moment(+hour).format('LT')} {hours[hour]}</div>)
+        <div>{format(+hour, 'hh:mm A')} {hours[hour]}</div>)
       }
   </div>
 
