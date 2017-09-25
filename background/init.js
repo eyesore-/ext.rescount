@@ -20,7 +20,7 @@ window.onload = () => {
 
   const config = { childList: true, subtree: true }
   const agentPageObserver = new MutationObserver(mutations => {
-    const responseButton = document.getElementsByClassName('GPISMLRKSH')[0]
+    const responseButton = document.getElementsByClassName('GPISMLRNSH')[0]
     if (responseButton) addUpdateEvent(responseButton)
     mutations.forEach(mutation => console.log(mutation.type))
   })
