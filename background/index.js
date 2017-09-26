@@ -33,7 +33,7 @@ const messageAction = {
   }
 }
 
-chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
+chrome.runtime.onMessage.addListener((request, sender) => {
   console.log('REQUEST:', request)
   messageAction[request.action](request.payload)
 })
