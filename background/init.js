@@ -1,4 +1,3 @@
-clear
 window.onload = () => {
   // TODO: verify response sent before sending message
   const updateEvent = e => {
