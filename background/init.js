@@ -1,3 +1,4 @@
+clear
 window.onload = () => {
   // TODO: verify response sent before sending message
   const updateEvent = e => {
@@ -18,7 +19,7 @@ window.onload = () => {
 
   const config = { childList: true, subtree: true }
   const agentPageObserver = new MutationObserver(mutations => {
-    const responseButton = document.getElementsByClassName('GPISMLRNSH')[0]
+    const responseButton = document.getElementsByClassName('GPISMLRLPB')[0]
     if (responseButton) addUpdateEvent(responseButton)
   })
   const bodyObserver = new MutationObserver(mutations => {
