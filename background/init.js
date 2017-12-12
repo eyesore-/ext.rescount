@@ -17,14 +17,15 @@ window.onload = () => {
   }
 
   const config = { childList: true, subtree: true }
+
   const agentPageObserver = new MutationObserver(mutations => {
     const responseButton = document.getElementsByClassName('GPISMLRLPB')[0]
     if (responseButton) addUpdateEvent(responseButton)
   })
   const bodyObserver = new MutationObserver(mutations => {
-    const container = document.getElementById('gwt-debug-AgentPage')
+    const container = document.getElementById('gwt-TabPanelBottom')
     if (container) {
-      agentPageObserver.observe(container.children[0], config)
+      agentPageObserver.observe(container, config)
       bodyObserver.disconnect()
     }
   })
