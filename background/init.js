@@ -37,10 +37,10 @@ window.onload = () => {
         .children[0]
         .textContent
         .split(' ')[0]
-      console.info('FIRST NAME:', firstName)
+      const messagePanel = document.getElementById('gwt-debug-ReviewPath').parentNode
+      const responseButton = locateSendButton(messagePanel, firstName)
+      if (responseButton) addUpdateEvent(responseButton)
     }
-    const responseButton = document.getElementsByClassName('GPISMLRLPB')[0]
-    if (responseButton) addUpdateEvent(responseButton)
   })
   const bodyObserver = new MutationObserver(mutations => {
     const container = document.getElementById('gwt-debug-AgentPage')
