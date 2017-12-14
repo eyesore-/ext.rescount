@@ -19,6 +19,15 @@ window.onload = () => {
   const config = { childList: true, subtree: true }
 
   const agentPageObserver = new MutationObserver(mutations => {
+    const authorInfoIcon = document.getElementById('gwt-debug-AuthorInfoIcon')
+    if (authorInfoIcon) {
+      const firstName = authorInfoIcon
+        .parentNode
+        .children[0]
+        .textContent
+        .split(' ')[0]
+      console.info('FIRST NAME:', firstName)
+    }
     const responseButton = document.getElementsByClassName('GPISMLRLPB')[0]
     if (responseButton) addUpdateEvent(responseButton)
   })
